@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Lane Medical</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #333;
+    }
+    header {
+      background-color: #0052cc;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      display: block;
+      text-decoration: none;
+    }
+    nav a:hover {
+      background-color: #00b33c;
+    }
+    .main-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .content {
+      padding: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+    footer {
+      background-color: #0052cc;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+  <script>
+  function authorizeClient() {
+    const input = prompt("Enter your delivery access password:");
+    const passInfo = JSON.parse(localStorage.getItem("clientPassInfo"));
+    const now = Date.now();
+
+    if (passInfo && input === passInfo.password && now < passInfo.expires) {
+      document.getElementById("tracking-content").classList.remove("hidden");
+    } else {
+      alert("Invalid or expired password.");
+    }
+  }
+
+  function authorizeAdmin() {
+    const username = prompt("Admin Username:");
+    const password = prompt("Admin Password:");
+    if (username === "JamalBrooksFLM" && password === "Jayceon06") {
+      alert("Welcome, Admin. Temporary password to give clients: FLM2025 (valid 72 hours)");
+      const now = Date.now();
+      const expires = now + (72 * 60 * 60 * 1000); // 72 hours in milliseconds
+      const passInfo = { password: "FLM2025", expires: expires };
+      localStorage.setItem("clientPassInfo", JSON.stringify(passInfo));
+    } else {
+      alert("Incorrect admin credentials.");
+    }
+  }
+</script>
+</head>
+<body>
+  <header>
+    <h1>Fast Lane Medical</h1>
+    <p>Speed They Need, Care You Trust</p>
+  </header>
+
+  <nav>
+    <a href="#about">About Us</a>
+    <a href="#tracking" onclick="authorizeClient(); return false;">Track Your Delivery</a>
+    <a href="#services">Services</a>
+    <a href="#employment">Employment</a>
+    <a href="#contact">Contact</a>
+    <a href="#admin" onclick="authorizeAdmin(); return false;">Admin</a>
+  </nav>
+
+  <img src="IMG_0591.jpg" alt="Fast Lane Medical Logo" class="main-image">
+
+  <div class="content" id="about">
+    <h2>About Us</h2>
+    <p>
+      Founded in 2025 and headquartered in Omaha, NE, Fast Lane Medical was created with one mission in mind: to provide dependable, fast, and secure medical courier services. We specialize in transporting lab specimens, pharmaceuticals, medical equipment, and more. Our team is trained in HIPAA-compliant handling procedures, ensuring every delivery is made with the utmost care.
+    </p>
+    <p>
+      Led by founder and CEO Jamal Brooks, our company is built on four pillars: Speed, Safety, Care, and Trust. Every delivery we make is a promise kept.
+    </p>
+  </div>
+
+  <div class="content hidden" id="tracking-content">
+    <h2>Track Your Delivery in Real Time</h2>
+    <p>
+      We know timing is everything. That’s why we offer real-time delivery tracking to all of our clients. Whether it’s a critical sample or sensitive pharmaceuticals, you’ll always know exactly where your delivery is.
+    </p>
+    <div style="width: 100%; max-width: 1000px; margin: auto;">
+      <iframe 
+        src="https://portal.gps-tracking.com/sharespot.aspx?st=4871628CB15D57B87D58FC88EC128C882BD5CEFDDC2DCDADAF64747211FF7454A082E8745318152594684F"
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        scrolling="no" 
+        style="border: 0;">
+      </iframe>
+    </div>
+  </div>
+
+  <div class="content" id="services">
+    <h2>Our Services</h2>
+    <p>
+      We offer fast, secure, and compliant delivery of medical specimens, prescriptions, lab results, equipment, and other healthcare materials throughout Nebraska and beyond.
+    </p>
+  </div>
+
+  <div class="content" id="employment">
+    <h2>Join Our Team</h2>
+    <p>
+      We're always looking for dependable drivers and support staff who are passionate about healthcare logistics. Contact us below to inquire about open positions.
+    </p>
+  </div>
+
+  <div class="content" id="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Email:</strong> Jamal@fastlanemedical.net</p>
+    <p><strong>Phone:</strong> (402) 905-1322</p>
+    <p><strong>CEO:</strong> Jamal Brooks</p>
+    <p><strong>Location:</strong> Omaha, NE</p>
+  </div>
+
+  <footer>
+    &copy; 2025 Fast Lane Medical. All rights reserved.
+  </footer>
+</body>
+</html>
